@@ -1,10 +1,28 @@
 def parsed_content_to_html(parsed_content):
-    html_content=""
-    for item in parsed_content:
-        html_content+=f"<h2>{item.title}</h2>"
-        html_content+=f"<p>{item.description}</p>"
-        html_content+=f"<audio controls><source src='{item.enclosures[0].href}' type='audio/mpeg'></audio>"
-    return html_content
+
+    main_page=""
+    episode=""
+    episodes_pages=""
+    episodes=parsed_content.episodes
+    
+    main_page=f"<h1>{parsed_content.title}</h1>"
+    main_page+="<ul>"
+    for i,ep in episodes:
+     main_page+=f"<li><a href=./episode_{i}.html></li>"
+     episode= f"""
+        <div>
+        <h2>{ep['title']}</h2>
+        <p>{ep['description']}</p>
+        <audio controls>
+            <source src="../{ep['audio_file']}" type="audio/mpeg">
+        </audio>
+        </div>
+        """
+     episodes_pages+=episode
+    main_page+="<ul>"
+    return (main_page,episodes_pages)
+
+   
 
 def save_html_to_file(html):
     directory="./static_websites"
