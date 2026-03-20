@@ -6,13 +6,17 @@ from html_to_zim import site_to_zim
 from bs4 import BeautifulSoup
 def main():
     for feed_source in feed_sources:
+
         parsed_content=feed_parser(feed_source)
         main_page,episodes=parsed_content_to_html(parsed_content)
+
         save_html_to_file(main_page,"index.html")
+        
         soup=BeautifulSoup(episodes,"html.parser")
         episodes=soup.find_all("div")
+
         for i,ep in enumerate(episodes):
             save_html_to_file(str(ep),f"episode_{i}.html")
-        site_to_zim("./static_website")
 
+        site_to_zim("Podcast2Zim", "./static_website", "./podcast.zim")
 main()
