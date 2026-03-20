@@ -12,7 +12,7 @@ def main():
         soup=BeautifulSoup(episodes,"html.parser")
         episodes=soup.find_all("div")
         for i,ep in enumerate(episodes):
-            save_html_to_file(ep,f"episode_{i}.html")
+            save_html_to_file(str(ep),f"episode_{i}.html")
         site_to_zim("./static_website")
 
 main()
