@@ -24,7 +24,7 @@ def parsed_content_to_html(parsed_content):
 
    
 
-def save_html_to_file(html):
-    directory="./static_websites"
-    with open("./static_websites/index.html") as f:
+def save_html_to_file(html,path):
+    directory="./static_website"
+    with open(f"./static_website/{path}","w") as f:
         f.write(html)

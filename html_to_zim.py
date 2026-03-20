@@ -1,4 +1,4 @@
-from zimscraperlib import Creator
+from zimscraperlib.zim import Creator
 
 def site_to_zim(title,site_path,zim_file_path):
  creator=Creator(
