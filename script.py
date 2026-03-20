@@ -18,5 +18,5 @@ def main():
         for i,ep in enumerate(episodes):
             save_html_to_file(str(ep),f"episode_{i}.html")
 
-        site_to_zim("Podcast2Zim", "./static_website", "./podcast.zim")
+        site_to_zim( "./static_website", "./podcast.zim")
 main()
