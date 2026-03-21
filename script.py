@@ -1,9 +1,10 @@
-# Complete Script for podcast2zim
 from rss_feed import feed_sources
 from parser import feed_parser
 from website_generator import parsed_content_to_html, save_html_to_file
 from html_to_zim import site_to_zim
 from bs4 import BeautifulSoup
+from pathlib import Path
+
 def main():
     for feed_source in feed_sources:
 
@@ -18,5 +19,5 @@ def main():
         for i,ep in enumerate(episodes):
             save_html_to_file(str(ep),f"episode_{i}.html")
 
-        site_to_zim( "./static_website", "./podcast.zim")
+        site_to_zim( Path("./static_website"), Path("./podcast.zim"))
 main()

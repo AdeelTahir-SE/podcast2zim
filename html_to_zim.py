@@ -45,5 +45,5 @@ def site_to_zim(source_folder: str, output_file: str):
         creator.finish()
 
     except Exception as e:
-        print(f"❌ Error during ZIM creation: {e}")
+        print(f"Error during ZIM creation: {e}")
         exit(1)
