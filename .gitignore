@@ -3,3 +3,4 @@ venv
 static_website
 *.zim
 *.html
+preview_zim.py

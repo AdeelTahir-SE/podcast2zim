@@ -1,6 +1,9 @@
 from pathlib import Path
 from zimscraperlib.zim.creator import Creator
 import os
+import mimetypes
+
+
 def site_to_zim(source_folder: str, output_file: str):
 
     source_path = Path(source_folder)
@@ -19,29 +22,24 @@ def site_to_zim(source_folder: str, output_file: str):
 
         creator.start()
 
-        for html_file in source_path.rglob("*.html"):
-          path=str(html_file.relative_to(source_path))
-          title=html_file.name
-          fpath = html_file.resolve()
+        for content_file in source_path.rglob("*"):
+            if not content_file.is_file():
+             continue
 
-          if (html_file.name == "index.html"):
+            path = str(content_file.relative_to(source_path))
+            title = content_file.name
+            fpath = content_file.resolve()
+            guessed_mimetype = mimetypes.guess_type(str(content_file))[0] or "application/octet-stream"
 
             creator.add_item_for(
                 path=path,
                 title=title,
                 fpath=fpath,
-                mimetype="text/html",
-                is_front=True
+                mimetype=guessed_mimetype,
+                is_front=(content_file.name == "index.html")
             )
-          else:
-            creator.add_item_for(
-                path=path,
-                title=title,
-                fpath=fpath,
-                mimetype="text/html",
-                is_front=False
-            )
-        # creator.add_redirect(path="", target_path="index.html", is_front=True)        
+
+        creator.add_redirect(path="", target_path="index.html", is_front=True)
         creator.finish()
 
     except Exception as e:

@@ -1,12 +1,12 @@
 import os
 from datetime import datetime
 
-def parsed_content_to_html(parsed_content, podcast_image=None):
+def parsed_content_to_html(MAX_EPISODES,parsed_content, podcast_image=None):
 
     main_page = ""
     episodes_pages = ""
 
-    episodes = parsed_content.entries
+    episodes = parsed_content.entries[:MAX_EPISODES] if MAX_EPISODES else parsed_content.entries
     feed_title = getattr(parsed_content.feed, "title", "Podcast")
 
     # Inline style for main page and body
